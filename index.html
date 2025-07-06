@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Statistical Learning - Course Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #000000;
+            color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav a {
+            color: #cccccc;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .sidebar-nav a::after {
+            content: '→';
+            font-size: 1.2em;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover::after {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        .main-content {
+            margin-left: 300px;
+            flex: 1;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #000000;
+            color: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #cccccc;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .overview {
+            background: #f8f9fa;
+            border: 2px solid #000000;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .overview h2 {
+            color: #000000;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .chapter {
+            background: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chapter h3 {
+            color: #000000;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 10px;
+        }
+
+        .chapter-content {
+            margin-bottom: 20px;
+        }
+
+        .techniques {
+            background: #f8f9fa;
+            border-left: 4px solid #000000;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .techniques h4 {
+            color: #000000;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .techniques ul {
+            color: #333333;
+            padding-left: 20px;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            background: #000000;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .github-link:hover {
+            background: #333333;
+            transform: translateY(-2px);
+        }
+
+        .github-link::after {
+            content: '→';
+            margin-left: 8px;
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .github-link:hover::after {
+            transform: translateX(3px);
+        }
+
+        .algorithms-summary {
+            background: #f8f9fa;
+            border: 2px solid #000000;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .algorithms-summary h2 {
+            color: #000000;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .algorithm-category {
+            background: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .algorithm-category h4 {
+            color: #000000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 8px;
+        }
+
+        .algorithm-category ul {
+            color: #333333;
+            padding-left: 20px;
+        }
+
+        .algorithm-category li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            background: #000000;
+            color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        footer h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        footer a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        .highlight {
+            background: #000000;
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 250px;
+            }
+            
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>Table of Contents</h2>
+        <ul class="sidebar-nav">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#ch1">1. Introduction</a></li>
+            <li><a href="#ch2">2. Linear Regression</a></li>
+            <li><a href="#ch3">3. Classification</a></li>
+            <li><a href="#ch4">4. Resampling Methods</a></li>
+            <li><a href="#ch5">5. Model Selection & Regularization</a></li>
+            <li><a href="#ch6">6. Tree-based Methods</a></li>
+            <li><a href="#ch7">7. Support Vector Machine</a></li>
+            <li><a href="#ch8">8. Deep Learning</a></li>
+            <li><a href="#ch9">9. Unsupervised Learning</a></li>
+            <li><a href="#ch10">10. Text Mining</a></li>
+            <li><a href="#algorithms">Algorithms Summary</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <header>
+                <h1>Introduction to Statistical Learning</h1>
+                <p class="subtitle">with Applications in Python</p>
+                <p><em>by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani</em></p>
+            </header>
+
+            <section class="overview" id="overview">
+                <h2>Book Overview</h2>
+                <p>
+                    <strong>Introduction to Statistical Learning with Applications in Python</strong> is the definitive guide to modern statistical learning methods, 
+                    specifically tailored for Python practitioners. This comprehensive text bridges the gap between mathematical theory and practical implementation, 
+                    making complex statistical concepts accessible through clear explanations and hands-on Python examples using popular libraries like 
+                    <span class="highlight">scikit-learn</span>, <span class="highlight">pandas</span>, and <span class="highlight">matplotlib</span>. 
+                    The book covers both supervised and unsupervised learning techniques, providing readers with the essential tools needed to analyze 
+                    real-world datasets effectively. Each chapter emphasizes practical Python implementation alongside theoretical understanding, 
+                    with extensive use of Jupyter notebooks for interactive learning and reproducible data science workflows.
+                </p>
+            </section>
+
+        <main>
+            <section class="chapter" id="ch1">
+                <h3>Chapter 1: Introduction</h3>
+                <div class="chapter-content">
+                    <p>
+                        This foundational chapter introduces the core concepts of statistical learning and establishes the Python ecosystem 
+                        for data science. The chapter covers the fundamental distinction between <strong>supervised learning</strong> 
+                        (where we have labeled training data) and <strong>unsupervised learning</strong> (where we discover hidden patterns), 
+                        while introducing essential Python libraries and tools for statistical learning.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Concepts & Python Tools:</h4>
+                        <ul>
+                            <li><strong>Statistical Learning Framework:</strong> Understanding prediction, inference, and model assessment</li>
+                            <li><strong>Python Data Science Stack:</strong> NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn</li>
+                            <li><strong>Supervised vs Unsupervised:</strong> Learning paradigms with Python examples</li>
+                            <li><strong>Regression vs Classification:</strong> Continuous vs categorical prediction tasks</li>
+                            <li><strong>Bias-Variance Tradeoff:</strong> Understanding model complexity with Python visualizations</li>
+                            <li><strong>Training vs Test Error:</strong> Model evaluation using train_test_split</li>
+                            <li><strong>Jupyter Notebooks:</strong> Interactive development environment for data science</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Python Implementation Highlights:</h4>
+                        <ul>
+                            <li>Setting up Python environment with Anaconda/Miniconda</li>
+                            <li>Data manipulation with Pandas DataFrames and Series</li>
+                            <li>Exploratory data analysis with Matplotlib and Seaborn</li>
+                            <li>Introduction to scikit-learn's consistent API design</li>
+                            <li>Best practices for reproducible data science workflows</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="#" class="github-link">📓 View Chapter 1 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch2">
+                <h3>Chapter 2: Linear Regression</h3>
+                <div class="chapter-content">
+                    <p>
+                        Linear regression serves as the cornerstone of statistical learning, providing both a simple yet powerful 
+                        approach to modeling relationships between variables. This chapter demonstrates how to implement linear 
+                        regression in Python using scikit-learn, statsmodels, and NumPy, covering both simple and multiple regression 
+                        with comprehensive model diagnostics and visualization techniques.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques & Python Implementation:</h4>
+                        <ul>
+                            <li><strong>Simple Linear Regression:</strong> Using sklearn.linear_model.LinearRegression</li>
+                            <li><strong>Multiple Linear Regression:</strong> Handling multiple predictors with Pandas</li>
+                            <li><strong>Model Fitting:</strong> .fit(), .predict(), and .score() methods in scikit-learn</li>
+                            <li><strong>Statistical Analysis:</strong> Using statsmodels.api for detailed regression statistics</li>
+                            <li><strong>Residual Analysis:</strong> Plotting residuals with Matplotlib and Seaborn</li>
+                            <li><strong>Model Diagnostics:</strong> R-squared, MSE, and coefficient interpretation</li>
+                            <li><strong>Visualization:</strong> Regression plots, residual plots, and QQ plots</li>
+                            <li><strong>Feature Engineering:</strong> Polynomial features and interaction terms</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Python Libraries & Methods:</h4>
+                        <ul>
+                            <li><strong>scikit-learn:</strong> LinearRegression, train_test_split, metrics</li>
+                            <li><strong>statsmodels:</strong> OLS regression with detailed statistical output</li>
+                            <li><strong>Pandas:</strong> Data preprocessing and dummy variable creation</li>
+                            <li><strong>NumPy:</strong> Matrix operations and mathematical computations</li>
+                            <li><strong>Matplotlib/Seaborn:</strong> Comprehensive visualization of results</li>
+                            <li><strong>Model validation:</strong> Cross-validation and performance metrics</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%202.ipynb" class="github-link" target="_blank">📓 View Chapter 2 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch3">
+                <h3>Chapter 3: Classification</h3>
+                <div class="chapter-content">
+                    <p>
+                        Classification is fundamental to machine learning, involving the prediction of categorical outcomes. This chapter 
+                        provides comprehensive coverage of classification methods in Python, from logistic regression to advanced techniques 
+                        like LDA and KNN, using scikit-learn's powerful classification toolkit with extensive model evaluation and 
+                        visualization capabilities.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques & Python Implementation:</h4>
+                        <ul>
+                            <li><strong>Logistic Regression:</strong> sklearn.linear_model.LogisticRegression with regularization</li>
+                            <li><strong>Linear Discriminant Analysis:</strong> sklearn.discriminant_analysis.LinearDiscriminantAnalysis</li>
+                            <li><strong>Quadratic Discriminant Analysis:</strong> QDA for non-linear decision boundaries</li>
+                            <li><strong>K-Nearest Neighbors:</strong> sklearn.neighbors.KNeighborsClassifier with distance metrics</li>
+                            <li><strong>Model Evaluation:</strong> Confusion matrices, classification reports, ROC curves</li>
+                            <li><strong>Cross-Validation:</strong> StratifiedKFold for balanced evaluation</li>
+                            <li><strong>Feature Scaling:</strong> StandardScaler and preprocessing for optimal performance</li>
+                            <li><strong>Multiclass Classification:</strong> One-vs-rest and one-vs-one strategies</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Python Libraries & Evaluation:</h4>
+                        <ul>
+                            <li><strong>scikit-learn:</strong> Classification algorithms and model selection tools</li>
+                            <li><strong>Evaluation Metrics:</strong> accuracy_score, precision_recall_fscore_support, roc_auc_score</li>
+                            <li><strong>Visualization:</strong> Seaborn confusion matrices, ROC curves with Matplotlib</li>
+                            <li><strong>Pandas:</strong> Data preprocessing and categorical encoding</li>
+                            <li><strong>NumPy:</strong> Probability computations and array operations</li>
+                            <li><strong>Class Imbalance:</strong> Handling with SMOTE and class_weight parameters</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%203.ipynb" class="github-link" target="_blank">📓 View Chapter 3 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch4">
+                <h3>Chapter 4: Resampling Methods</h3>
+                <div class="chapter-content">
+                    <p>
+                        Resampling methods are essential tools for model assessment and selection. This chapter covers 
+                        cross-validation and bootstrap methods, which allow us to obtain additional information about 
+                        our fitted models without collecting new data. These techniques are crucial for avoiding overfitting 
+                        and selecting optimal model parameters.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Cross-Validation:</strong> Dividing data into training and validation sets</li>
+                            <li><strong>Leave-One-Out CV (LOOCV):</strong> Using single observation as validation</li>
+                            <li><strong>k-Fold Cross-Validation:</strong> Dividing data into k equal parts</li>
+                            <li><strong>Bootstrap:</strong> Resampling with replacement for uncertainty quantification</li>
+                            <li><strong>Validation Set Approach:</strong> Simple train-test split methodology</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>Cross-validation provides more reliable estimates of model performance</li>
+                            <li>Bootstrap helps estimate sampling variability of statistics</li>
+                            <li>Resampling methods are computationally intensive but provide valuable insights</li>
+                            <li>Proper validation prevents overfitting and improves generalization</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%204.ipynb" class="github-link" target="_blank">📓 View Chapter 4 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch5">
+                <h3>Chapter 5: Linear Model Selection and Regularization</h3>
+                <div class="chapter-content">
+                    <p>
+                        This chapter extends linear regression by introducing methods for improving model performance 
+                        through variable selection and regularization. These techniques help address problems with 
+                        traditional linear regression, such as overfitting and multicollinearity, while maintaining 
+                        interpretability.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Subset Selection:</strong> Best subset, forward stepwise, backward stepwise</li>
+                            <li><strong>Ridge Regression:</strong> L2 regularization to shrink coefficients</li>
+                            <li><strong>Lasso Regression:</strong> L1 regularization for automatic feature selection</li>
+                            <li><strong>Elastic Net:</strong> Combining Ridge and Lasso penalties</li>
+                            <li><strong>Principal Components Regression (PCR):</strong> Dimension reduction approach</li>
+                            <li><strong>Partial Least Squares (PLS):</strong> Supervised dimension reduction</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>Regularization helps prevent overfitting in high-dimensional settings</li>
+                            <li>Lasso automatically performs feature selection by shrinking coefficients to zero</li>
+                            <li>Ridge regression is preferred when many predictors have small effects</li>
+                            <li>Cross-validation is essential for selecting optimal regularization parameters</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%205.ipynb" class="github-link" target="_blank">📓 View Chapter 5 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch6">
+                <h3>Chapter 6: Tree-based Methods</h3>
+                <div class="chapter-content">
+                    <p>
+                        Tree-based methods provide a powerful alternative to linear models, capable of capturing 
+                        non-linear relationships and interactions between variables. This chapter covers decision trees 
+                        and ensemble methods that combine multiple trees to create more robust and accurate predictions.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Decision Trees:</strong> Recursive binary splitting for classification and regression</li>
+                            <li><strong>Tree Pruning:</strong> Reducing overfitting through cost complexity pruning</li>
+                            <li><strong>Bagging:</strong> Bootstrap aggregating to reduce variance</li>
+                            <li><strong>Random Forest:</strong> Bagging with random feature selection</li>
+                            <li><strong>Boosting:</strong> Sequential learning to reduce bias (AdaBoost, Gradient Boosting)</li>
+                            <li><strong>XGBoost:</strong> Optimized gradient boosting implementation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>Individual trees are prone to overfitting but ensemble methods address this</li>
+                            <li>Random forests provide good performance with minimal tuning</li>
+                            <li>Boosting methods can achieve very high accuracy but require careful tuning</li>
+                            <li>Tree-based methods naturally handle mixed data types and missing values</li>
+                            <li>Feature importance can be derived from tree-based models</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%206.ipynb" class="github-link" target="_blank">📓 View Chapter 6 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch7">
+                <h3>Chapter 7: Support Vector Machine</h3>
+                <div class="chapter-content">
+                    <p>
+                        Support Vector Machines (SVMs) are powerful and versatile machine learning algorithms capable of 
+                        performing both linear and non-linear classification, regression, and outlier detection. This chapter 
+                        covers the mathematical foundations of SVMs and their practical implementation, including the use of 
+                        kernel functions to handle non-linear relationships.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Maximal Margin Classifier:</strong> Finding optimal separating hyperplane</li>
+                            <li><strong>Support Vector Classifier:</strong> Soft margin approach allowing misclassification</li>
+                            <li><strong>Support Vector Machine:</strong> Using kernels for non-linear boundaries</li>
+                            <li><strong>Kernel Functions:</strong> Linear, polynomial, radial basis function (RBF), sigmoid</li>
+                            <li><strong>Support Vector Regression (SVR):</strong> Applying SVM to regression problems</li>
+                            <li><strong>Multi-class Classification:</strong> One-vs-one and one-vs-all approaches</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>SVMs are effective in high-dimensional spaces and with limited data</li>
+                            <li>Kernel trick allows SVMs to handle non-linear relationships efficiently</li>
+                            <li>SVMs are memory efficient as they use subset of training points (support vectors)</li>
+                            <li>Parameter tuning (C, gamma) is crucial for optimal performance</li>
+                            <li>SVMs can be sensitive to feature scaling</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="#" class="github-link">📓 View Chapter 7 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch8">
+                <h3>Chapter 8: Deep Learning</h3>
+                <div class="chapter-content">
+                    <p>
+                        Deep Learning represents a paradigm shift in machine learning, using neural networks with multiple 
+                        layers to automatically learn hierarchical representations of data. This chapter introduces the 
+                        fundamental concepts of neural networks, from simple perceptrons to complex deep architectures 
+                        used in modern AI applications.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Artificial Neural Networks:</strong> Multi-layer perceptrons and feedforward networks</li>
+                            <li><strong>Activation Functions:</strong> ReLU, sigmoid, tanh, and their properties</li>
+                            <li><strong>Backpropagation:</strong> Algorithm for training neural networks</li>
+                            <li><strong>Convolutional Neural Networks (CNNs):</strong> Specialized for image processing</li>
+                            <li><strong>Recurrent Neural Networks (RNNs):</strong> For sequential data and time series</li>
+                            <li><strong>Regularization:</strong> Dropout, batch normalization, early stopping</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>Deep learning excels at learning complex patterns from large datasets</li>
+                            <li>Architecture design and hyperparameter tuning are crucial</li>
+                            <li>Computational resources and training time are significant considerations</li>
+                            <li>Transfer learning can accelerate training on new tasks</li>
+                            <li>Interpretability remains a challenge in deep learning models</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%208.ipynb" class="github-link" target="_blank">📓 View Chapter 8 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch9">
+                <h3>Chapter 9: Unsupervised Learning</h3>
+                <div class="chapter-content">
+                    <p>
+                        Unsupervised learning focuses on finding hidden patterns and structures in data without labeled 
+                        examples. This chapter covers principal component analysis for dimensionality reduction and 
+                        clustering methods for discovering groups within data, essential techniques for exploratory 
+                        data analysis and data preprocessing.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Principal Component Analysis (PCA):</strong> Dimensionality reduction through variance maximization</li>
+                            <li><strong>K-Means Clustering:</strong> Partitioning data into k clusters</li>
+                            <li><strong>Hierarchical Clustering:</strong> Building tree-like cluster structures</li>
+                            <li><strong>DBSCAN:</strong> Density-based clustering for arbitrary shaped clusters</li>
+                            <li><strong>Gaussian Mixture Models:</strong> Probabilistic clustering approach</li>
+                            <li><strong>t-SNE:</strong> Non-linear dimensionality reduction for visualization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>PCA is useful for visualization and preprocessing high-dimensional data</li>
+                            <li>Clustering algorithms have different strengths depending on data characteristics</li>
+                            <li>Determining optimal number of clusters requires domain knowledge and validation</li>
+                            <li>Unsupervised learning is valuable for exploratory data analysis</li>
+                            <li>Results interpretation requires careful consideration of domain context</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="https://github.com/nziza-saint/data_mining_practices/blob/main/Chapter%209.ipynb" class="github-link" target="_blank">📓 View Chapter 9 Notebook</a>
+            </section>
+
+            <section class="chapter" id="ch10">
+                <h3>Chapter 10: Text Mining</h3>
+                <div class="chapter-content">
+                    <p>
+                        Text mining involves extracting meaningful information from unstructured text data. This chapter 
+                        covers techniques for preprocessing text, converting text to numerical representations, and 
+                        applying machine learning methods to textual data for tasks such as sentiment analysis, 
+                        document classification, and topic modeling.
+                    </p>
+                    
+                    <div class="techniques">
+                        <h4>Key Techniques:</h4>
+                        <ul>
+                            <li><strong>Text Preprocessing:</strong> Tokenization, stemming, lemmatization, stop word removal</li>
+                            <li><strong>Bag of Words:</strong> Representing text as word frequency vectors</li>
+                            <li><strong>TF-IDF:</strong> Term frequency-inverse document frequency weighting</li>
+                            <li><strong>N-grams:</strong> Capturing word sequences and context</li>
+                            <li><strong>Word Embeddings:</strong> Dense vector representations of words (Word2Vec, GloVe)</li>
+                            <li><strong>Topic Modeling:</strong> Latent Dirichlet Allocation (LDA) for discovering topics</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="techniques">
+                        <h4>Main Takeaways:</h4>
+                        <ul>
+                            <li>Text preprocessing significantly affects model performance</li>
+                            <li>Different text representations capture different aspects of meaning</li>
+                            <li>Word embeddings capture semantic relationships between words</li>
+                            <li>Text mining applications span many domains and business problems</li>
+                            <li>Handling large vocabularies and sparse data is a key challenge</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="#" class="github-link">📓 View Chapter 10 Notebook</a>
+            </section>
+        </main>
+
+        <section class="algorithms-summary" id="algorithms">
+            <h2>Algorithms Summary by Task Type</h2>
+            <p style="text-align: center; margin-bottom: 25px; color: #666;">
+                <em>All algorithms implemented using Python's scikit-learn, statsmodels, and related libraries</em>
+            </p>
+            
+            <div class="algorithm-category">
+                <h4>📈 Regression Algorithms</h4>
+                <ul>
+                    <li><strong>Linear Regression:</strong> sklearn.linear_model.LinearRegression, statsmodels.OLS</li>
+                    <li><strong>Ridge Regression:</strong> sklearn.linear_model.Ridge with L2 regularization</li>
+                    <li><strong>Lasso Regression:</strong> sklearn.linear_model.Lasso with L1 regularization</li>
+                    <li><strong>Elastic Net:</strong> sklearn.linear_model.ElasticNet combining Ridge and Lasso</li>
+                    <li><strong>Polynomial Regression:</strong> sklearn.preprocessing.PolynomialFeatures</li>
+                    <li><strong>Principal Components Regression:</strong> sklearn.decomposition.PCA + LinearRegression</li>
+                    <li><strong>Partial Least Squares:</strong> sklearn.cross_decomposition.PLSRegression</li>
+                    <li><strong>Decision Tree Regression:</strong> sklearn.tree.DecisionTreeRegressor</li>
+                    <li><strong>Random Forest Regression:</strong> sklearn.ensemble.RandomForestRegressor</li>
+                    <li><strong>Support Vector Regression:</strong> sklearn.svm.SVR with kernel tricks</li>
+                    <li><strong>Neural Network Regression:</strong> sklearn.neural_network.MLPRegressor</li>
+                </ul>
+            </div>
+
+            <div class="algorithm-category">
+                <h4>🎯 Classification Algorithms</h4>
+                <ul>
+                    <li><strong>Logistic Regression:</strong> sklearn.linear_model.LogisticRegression</li>
+                    <li><strong>Linear Discriminant Analysis:</strong> sklearn.discriminant_analysis.LinearDiscriminantAnalysis</li>
+                    <li><strong>Quadratic Discriminant Analysis:</strong> sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis</li>
+                    <li><strong>K-Nearest Neighbors:</strong> sklearn.neighbors.KNeighborsClassifier</li>
+                    <li><strong>Decision Trees:</strong> sklearn.tree.DecisionTreeClassifier</li>
+                    <li><strong>Random Forest:</strong> sklearn.ensemble.RandomForestClassifier</li>
+                    <li><strong>Gradient Boosting:</strong> sklearn.ensemble.GradientBoostingClassifier</li>
+                    <li><strong>AdaBoost:</strong> sklearn.ensemble.AdaBoostClassifier</li>
+                    <li><strong>Support Vector Machine:</strong> sklearn.svm.SVC with various kernels</li>
+                    <li><strong>Neural Networks:</strong> sklearn.neural_network.MLPClassifier</li>
+                    <li><strong>Naive Bayes:</strong> sklearn.naive_bayes (Gaussian, Multinomial, Bernoulli)</li>
+                    <li><strong>XGBoost:</strong> xgboost.XGBClassifier for gradient boosting</li>
+                </ul>
+            </div>
+
+            <div class="algorithm-category">
+                <h4>🔍 Unsupervised Learning Algorithms</h4>
+                <ul>
+                    <li><strong>K-Means Clustering:</strong> sklearn.cluster.KMeans for centroid-based clustering</li>
+                    <li><strong>Hierarchical Clustering:</strong> sklearn.cluster.AgglomerativeClustering</li>
+                    <li><strong>DBSCAN:</strong> sklearn.cluster.DBSCAN for density-based clustering</li>
+                    <li><strong>Gaussian Mixture Models:</strong> sklearn.mixture.GaussianMixture</li>
+                    <li><strong>Principal Component Analysis:</strong> sklearn.decomposition.PCA</li>
+                    <li><strong>t-SNE:</strong> sklearn.manifold.TSNE for non-linear dimensionality reduction</li>
+                    <li><strong>UMAP:</strong> umap-learn library for dimension reduction and visualization</li>
+                    <li><strong>Independent Component Analysis:</strong> sklearn.decomposition.FastICA</li>
+                    <li><strong>Association Rules:</strong> mlxtend.frequent_patterns for market basket analysis</li>
+                    <li><strong>Latent Dirichlet Allocation:</strong> sklearn.decomposition.LatentDirichletAllocation</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <h3>Course Resources</h3>
+            <p>
+                📚 <strong>Textbook:</strong> Introduction to Statistical Learning with Applications in Python<br>
+                👨‍💻 <strong>GitHub Repository:</strong> <a href="https://github.com/nziza-saint/data_mining_practices" target="_blank">View All Lab Notebooks</a><br>
+                🌐 <strong>Course Website:</strong> <a href="#" target="_blank">Official Course Page</a><br>
+                📖 <strong>Book Website:</strong> <a href="https://www.statlearning.com/" target="_blank">StatLearning.com</a><br>
+                🐍 <strong>Python Resources:</strong> <a href="https://scikit-learn.org/" target="_blank">Scikit-learn Documentation</a>
+            </p>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                <p><em>Created for Data Mining Practices Course | Last Updated: July 2025</em></p>
+            </div>
+        </footer>
+        </div>
+    </div>
+</body>
+</html>
